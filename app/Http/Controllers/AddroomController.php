@@ -24,16 +24,6 @@ class AddroomController extends Controller
             'counter' => $counter,
         ]); 
     }
-    public function allrooms()
-    {
-        $rooms = Room::all(); 
-        $counter = $rooms->count();
-        return view('room', [
-            'rooms' => $rooms,
-            'counter' => $counter,
-        ]); 
-    }
-
     /**
      * Show the form for creating a new resource.
      *

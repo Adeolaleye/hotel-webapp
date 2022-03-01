@@ -1,6 +1,5 @@
 @extends('layouts.main2') 
 @section('title','Room Details')
- 
 @section('content')
 <div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
     <div class="container">
@@ -101,28 +100,27 @@
                     <aside class="widget">
                         <div class="vbf">
                             <h2 class="form_title"><i class="fa fa-calendar"></i> BOOK ONLINE</h2>
-                            <form id="booking-form" class="inner">
+                            <form id="booking-form" class="inner" method="post" action="{{ route('booknow')}}">
+                                @csrf
                                 <div class="form-group">
-                                    <input class="form-control" name="booking-name" placeholder="Enter Your Name" type="text">
+                                    <input class="form-control" name="name" placeholder="Enter Your Name" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="booking-email" placeholder="Enter Your Email Address" type="email">
+                                    <input class="form-control" name="email" placeholder="Enter Your Email Address" type="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" name="booking-phone" placeholder="Enter Your Phone Number" type="text">
+                                    <input class="form-control" name="phone" placeholder="Enter Your Phone Number" type="text" required>
                                 </div>
                                 <div class="form-group">
                                     <div class="form_select">
-                                        <select name="booking-roomtype" class="form-control" title="Select Room Type" data-header="Room Type" disabled>
-                                            <option value="Single Room" selected>Single Room</option>
-                                            <option value="Double Room">Double Room</option>
-                                            <option value="Deluxe Room">Deluxe Room</option>
+                                        <select name="type" class="form-control" title="Select Room Type" data-header="Room Type" required>
+                                            <option value="{{ $room->id }}" selected>{{ $room->name }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="form_select">
-                                        <select name="booking-adults" class="form-control md_noborder_right" title="Adults" data-header="Adults">
+                                        <select name="adult_no" class="form-control md_noborder_right" title="Adults" data-header="Adults">
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -133,7 +131,7 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="form_select">
-                                        <select name="booking-children" class="form-control" title="Children" data-header="Children">
+                                        <select name="children_no" class="form-control" title="Children" data-header="Children" required>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -145,16 +143,22 @@
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="input-group">
                                         <div class="form_date">
-                                            <input type="date" id="start" name="booking-checkin" class=" form-control" placeholder="Arrival" value="2022-02-01" min="2018-01-01" max="2030-12-31">
-                                                </div>
+                                            <input type="date" id="start" name="arrival_date" class=" form-control" placeholder="Arrival" value="2022-02-01" min="2018-01-01" max="2030-12-31">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12 nopadding">
                                     <div class="input-group">
                                         <div class="form_date">
-                                            <input type="date" id="start" name="booking-checkout" class=" form-control" placeholder="Departure" value="2022-02-01" min="2018-01-01" max="2030-12-31">
+                                            <input type="date" id="start" name="departure_date" class=" form-control" placeholder="Departure" value="2022-02-01" min="2018-01-01" max="2030-12-31">
 
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 nopadding">
+                                    <div class="input-group">
+                                        <label>Your Comment</label>
+                                        <textarea class="form-control" name="booking-comments"  style="height: 150px;" placeholder="Your Comments..."></textarea>
                                     </div>
                                 </div>
                                 <button class="button btn_lg btn_blue btn_full" type="submit">BOOK A ROOM NOW</button>

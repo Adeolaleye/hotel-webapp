@@ -20,7 +20,7 @@
                     <a href="/" >HOME </a>
                 </li>
                 <li>
-                    <a href="rooms">ROOMS</a>
+                    <a href="{{ route('rooms') }}">ROOMS</a>
                 </li>
                 <li class=""><a href="" aria-expanded="true">fACILITIES </a>
                     
@@ -28,7 +28,7 @@
                 
                 <li><a href="contact">CONTACT US</a></li>
                 <li class="menu_button"  style="background-color:  rgb(2, 49, 2)">
-                    <a href="" class="button  btn_yellow"><i class="fa fa-calendar"  style="background-color: red;"></i>BOOK ONLINE</a>
+                    <a href="{{ route('bookonline') }}" class="button  btn_yellow"><i class="fa fa-calendar"  style="background-color: red;"></i>BOOK ONLINE</a>
                 </li>
             </ul>
         </nav>

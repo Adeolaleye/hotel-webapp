@@ -162,18 +162,20 @@
               <div class="hbf_2" >
                 <div class="container" >
                     <div class="inner" style="background-color:  rgb(2, 49, 2);">
-                        <form id="booking-form">
+                    @include('includes.alerts')
+                        <form id="booking-form" method="post" action="{{ route('createbooking') }}">
+                            @csrf
                             <div class="col-md-2 md_pr5">
                                 <div class="form-group">
-                                    <input name="booking-email" type="text" id="email" value="" class="form-control" placeholder="Your Email Address">
+                                    <input name="email" type="text" id="email" value="" class="form-control" placeholder="Your Email Address" required>
                                 </div>
                             </div>
                             <div class="col-md-2 md_p5">
                                 <div class="form-group">
                                     <div class="form_select">
-                                        <select name="booking-roomtype" class="form-control" title="Select Room Type" data-header="Room Type">
+                                        <select name="type" class="form-control" title="Select Room Type" data-header="Room Type" required>
                                             @foreach ($rooms as $room )
-                                            <option value="{{ $room->id }}" {{ old('roomtype') == $room->id ? 'selected' : '' }}>{{ $room->name }}</option>
+                                            <option value="{{ $room->id }}" {{ old('roomtype') == $room->id ? 'selected' : '' }} data-subtext="<span class='label label-info'>&#8358;{{ number_format($room->price) }} / night</span>">{{ $room->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -184,14 +186,14 @@
                                     <div class="col-md-6 col-sm-6 arrival_date md_pl5 md_nopadding_right">
                                         <div class="form-group">
                                             <div class="form_date" id="picker">
-                                                <input type="date" id="start" name="trip-start" class=" form-control" placeholder="Arrival" value="2022-02-01" min="2018-01-01" max="2030-12-31">
+                                                <input type="date" id="start" name="arrival_date" class=" form-control" placeholder="Arrival" value="2022-02-01" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-6 departure_date md_pr5 md_nopadding_left">
                                         <div class="form-group">
                                             <div class="form_date departure">
-                                                <input type="date" id="start" name="trip-start" class=" form-control" placeholder="Departure" value="2022-02-01" min="2018-01-01" max="2030-12-31">
+                                                <input type="date" id="start" name="departure_date" class=" form-control" placeholder="Departure" value="2022-02-01" required>
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +204,7 @@
                                     <div class="col-md-6 col-sm-6 adults md_pl5 md_nopadding_right">
                                         <div class="form-group">
                                             <div class="form_select">
-                                                <select name="booking-adults" class="form-control md_noborder_right" title="Adults" data-header="Adults">
+                                                <select name="adult_no" class="form-control md_noborder_right" title="Adults" data-header="Adults" required>
                                                     <option value="0">0</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
@@ -215,7 +217,7 @@
                                     <div class="col-md-6 col-sm-6 children md_pr5 md_nopadding_left">
                                         <div class="form-group">
                                             <div class="form_select childrens_select">
-                                                <select name="booking-children" class="form-control dropup" title="Children" data-header="Adults">
+                                                <select name="children_no" class="form-control dropup" title="Children" data-header="Children" required>
                                                     <option value="0">0</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
