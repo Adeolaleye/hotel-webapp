@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','HomeController@index');
-Route::get('rooms', function () {return view('room'); });
+Route::get('rooms', 'AddroomController@allrooms')->name('rooms');
 Route::get('contact', function () { return view('contact'); });
-Route::get('roomdetails', function () { return view('roomdetails'); });
+Route::get('roomdetails/{id}', 'AddroomController@show')->name('roomdetails');
 Route::get('addroom','AddroomController@create')->name('addroom');
 Route::post('createroom','AddroomController@store')->name('createroom');
 Route::get('addedrooms', 'AddroomController@index')->name('addedrooms');

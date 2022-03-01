@@ -1,5 +1,5 @@
 @extends('layouts.main2') 
-@section('title','Contact')
+@section('title','Room Details')
  
 @section('content')
 <div class="page_title gradient_overlay" style="background: url(images/page_title_bg.jpg);">
@@ -7,8 +7,9 @@
         <div class="inner">
             <h1>Room Details</h1>
             <ol class="breadcrumb">
-                <li><a href="">Home</a></li>
-                <li>Room Name</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="">All Rooms</a></li>
+                <li>{{ $room->name }}</li>
             </ol>
         </div>
     </div>
@@ -17,69 +18,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
+            <h2 class="upper c_title">{{ $room->name }} <span style="font-size:18px">@if ($room->type == 1)(Single Room) @endif</span></h2>
+                <article class="room">
+                    <figure>
+                        <div class="price"> &#8358;{{ number_format($room->price) }} <span>/ night</span></div>
+                            <img src="{{ '/'.$room->feature_image }}" class="img-responsive" alt="Image">
+                    </figure>
+                </article>
                 <div class="slider">
-                    <div id="slider-larg" class="owl-carousel image-gallery">
-                        <!-- ITEM -->
-                        <div class="item lightbox-image-icon">
-                            <a href="images/rooms/r1.jpg" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="images/rooms/r1.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="item lightbox-image-icon">
-                            <a href="images/rooms/s4.jpg" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="images/rooms/s4.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="item lightbox-image-icon">
-                            <a href="images/rooms/s3.jpg" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="images/rooms/s3.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="item lightbox-image-icon">
-                            <a href="images/rooms/single-room/single-room4.jpg" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="images/rooms/single-room/single-room4.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="item lightbox-image-icon">
-                            <a href="images/rooms/single-room/single-room5.jpg" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="images/rooms/single-room/single-room5.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="item lightbox-image-icon">
-                            <a href="images/rooms/single-room/single-room6.jpg" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="images/rooms/single-room/single-room6.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="item lightbox-image-icon">
-                            <a href="images/rooms/single-room/single-room7.jpg" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="images/rooms/single-room/single-room7.jpg" alt="Image">
-                            </a>
-                        </div>
-                        <!-- ITEM -->
-                        <div class="item  lightbox-image-icon">
-                            <a href="images/rooms/single-room/single-room8.jpg" class="hover_effect h_lightbox h_blue">
-                                <img class="img-responsive" src="images/rooms/single-room/single-room8.jpg" alt="Image">
-                            </a>
-                        </div>
-                    </div>
                     <div id="thumbs" class="owl-carousel">
-                        <!-- ITEM -->
-                        <div class="item"><img class="img-responsive" src="images/rooms/r1.jpg" alt="Image"></div>
-                        <!-- ITEM -->
-                        <div class="item"><img class="img-responsive" src="images/rooms/r2.jpg" alt="Image"></div>
-                        <!-- ITEM -->
-                        <div class="item"><img class="img-responsive" src="images/rooms/s3.jpg" alt="Image"></div>
-                        <!-- ITEM -->
-                        <div class="item"><img class="img-responsive" src="images/rooms/s4.jpg" alt="Image"></div>
-                        </div>
+                        <div class="item"><img class="img-responsive" src="{{ '/'.$room->feature_image }}" alt="Image"></div>
+                    </div>
                 </div>
-                
+                <div class="main_title t_style a_left s_title mt50">
+                    <div class="c_inner">
+                        <h2 class="c_title">Room Description</h2>
+                    </div>
+                    <p>{{ $room->description }}</p>
+                </div>
                 <div class="main_title t_style a_left s_title mt50">
                     <div class="c_inner">
                         <h2 class="c_title">ROOM SERVICES</h2>
@@ -93,7 +49,8 @@
                                 <li><i class="fa fa-check"></i>KITCHEN </li>
                                 <li><i class="fa fa-check"></i>DINNING AREA</li>
                                 <li><i class="fa fa-check"></i>MINI BAR</li>
-                                <li><i class="fa fa-check"></i>Room Service</li>
+                                <li><i class="fa fa-check"></i>MASSAGE TABLE</li>
+                                <li><i class="fa fa-check"></i>FREE WIFI</li>
                             </ul>
                         </div>
                         <div class="col-sm-4 nopadding">
@@ -103,11 +60,21 @@
                                 <li ><i class="fa fa-check"></i>GAZEBOS</li>
                                 <li ><i class="fa fa-check"></i> BAR</li>
                                 <li ><i class="fa fa-check"></i> KARAOKE</li>
+                                <li ><i class="fa fa-check"></i>GYM AREA</li>
                             </ul>
                         </div>
-                        <div class="col-sm-4 nopadding_left">
-                            
+                        @if ($room->type == 2 || $room->type == 3)
+                        <div class="col-sm-4 nopadding">
+                            <ul class="list-unstyled">
+                                <h4>OTHERS</h4>
+                                <li ><i class="fa fa-check"></i>PRIVATE PATIO</li>
+                                <li ><i class="fa fa-check"></i>KITCHENNETTE</li>
+                                <li ><i class="fa fa-check"></i> MINI LOUNGE</li>
+                                <li ><i class="fa fa-check"></i> JACUZZI </li>
+                                <li ><i class="fa fa-check"></i> SHOWER TUB </li>
+                            </ul>
                         </div>
+                        @endif
                     </div>
                 </div>
                 <div class="similar_rooms">

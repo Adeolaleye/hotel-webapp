@@ -12,35 +12,25 @@
             Furnished with the finest materials and designed to induce immense relaxation.
             </p>
         <div class="row">
+            @foreach ($rooms as $room)
+            @if ($room->type == 3) 
             <div class="col-md-6">
                 <article class="room">
                     <figure>
-                        <div class="price"> &#8358;600.000 <span>/ night</span></div>
-                        <a class="hover_effect h_blue h_link" href="">
-                            <img src="{{asset('images/rooms/d1.jpg')}}" class="img-responsive" alt="Image">
+                        <div class="price"> &#8358;{{ number_format($room->price) }} <span>/ night</span></div>
+                        <a class="hover_effect h_blue h_link" href="{{ route('roomdetails', $room->id) }}">
+                            <img src="{{ '/'.$room->feature_image }}" class="img-responsive" alt="Image">
                         </a>
                         <figcaption>
-                            <h4 class="upper"><a href="">5 BEDROOM VILLA </a></h4>
-                            <span class="f_right"><a href="roomdetails" class="button btn_sm btn_blue">VIEW DETAILS</a></span>
+                            <h4 class="upper"><a href="{{ route('roomdetails', $room->id) }}">{{ $room->name }}</a></h4>
+                            <span class="f_right"><a href="{{ route('roomdetails', $room->id) }}" class="button btn_sm btn_blue">VIEW DETAILS</a></span>
+                            
                         </figcaption>
                     </figure>
                 </article>
             </div>
-    
-            <div class="col-md-6">
-                <article class="room">
-                    <figure>
-                        <div class="price">&#8358;500.000 <span>/ night</span></div>
-                        <a class="hover_effect h_blue h_link" href="roomdetails">
-                            <img src="{{asset('images/rooms/e1.jpg')}}" class="img-responsive" alt="Image">
-                        </a>
-                        <figcaption>
-                            <h4><a href="roomdetails">2 BEDROOM PENTHOUSE</a></h4>
-                            <span class="f_right"><a href="roomdetails" class="button btn_sm btn_blue">VIEW DETAILS</a></span>
-                        </figcaption>
-                    </figure>
-                </article>
-            </div>
+            @endif
+            @endforeach
         </div> 
     </div>
 </section>
@@ -52,20 +42,22 @@
             <p class="main_description a_center"></p>
         <div class="row">
             @foreach ($rooms as $room)
+            @if ($room->type == 1)    
             <div class="col-md-4">
                 <article class="room">
                     <figure>
                         <div class="price"> &#8358;{{ number_format($room->price) }} <span>/ night</span></div>
-                        <a class="hover_effect h_blue h_link" href="roomdetails">
+                        <a class="hover_effect h_blue h_link" href="{{ route('roomdetails', $room->id) }}">
                             <img src="{{ '/'.$room->feature_image }}" class="img-responsive" alt="Image">
                         </a>
                         <figcaption>
-                            <h4 class="upper"><a href="roomdetails">{{ $room->name }}</a></h4>
-                            <span class="f_right"><a href="roomdetails" class="button btn_sm btn_blue">VIEW DETAILS</a></span>
+                            <h4 class="upper"><a href="{{ route('roomdetails', $room->id) }}">{{ $room->name }}</a></h4>
+                            <span class="f_right"><a href="{{ route('roomdetails', $room->id) }}" class="button btn_sm btn_blue">VIEW DETAILS</a></span>
                         </figcaption>
                     </figure>
                 </article>
             </div>
+            @endif
             @endforeach
         </div>
     </div>

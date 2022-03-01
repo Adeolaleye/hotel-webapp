@@ -24,6 +24,15 @@ class AddroomController extends Controller
             'counter' => $counter,
         ]); 
     }
+    public function allrooms()
+    {
+        $rooms = Room::all(); 
+        $counter = $rooms->count();
+        return view('room', [
+            'rooms' => $rooms,
+            'counter' => $counter,
+        ]); 
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -70,7 +79,7 @@ class AddroomController extends Controller
             'facilities'=>$request->facilities,
             'unit'=>$request->unit,
             ]);
-           // return redirect(route('addclient'))->with('message', 'Client Added Successfully');
+           // return redirect(route('addroom'))->with('message', 'Room Added Successfully');
             return back()->with('message', 'Room Added Successfully');
     }
 
@@ -82,7 +91,8 @@ class AddroomController extends Controller
      */
     public function show($id)
     {
-        //
+        $room = Room::where('id', $id)->first();
+        return view('roomdetails',compact('room'));
     }
 
     /**

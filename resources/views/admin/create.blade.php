@@ -33,23 +33,23 @@
                                     <div class="col-md-6 mb20">
                                         <div class="form-group">
                                             <label>Room Name</label>
-                                            <input name="name" type="text" class="form-control" placeholder="Room Name" required>
+                                            <input name="name" type="text" value="{{ old('name') }}" class="form-control" placeholder="Room Name" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb20">
                                         <div class="form-group">
                                             <label>Room Name</label>
                                             <select name="type" type="text" class="form-control" required data-header="Choose Room Type">
-                                                <option value="1">Single Room</option>
-                                                <option value="2">Two Rooms</option>
-                                                <option value="3">Many Rooms</option>
+                                                <option value="1"{{ old('type') == '1' ? 'selected' : '' }}>Single Room</option>
+                                                <option value="2"{{ old('type') == '2' ? 'selected' : '' }}>Two Rooms</option>
+                                                <option value="3"{{ old('type') == '3' ? 'selected' : '' }}>Many Rooms</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb20">
                                         <div class="form-group">
                                             <label>Room Price</label>
-                                            <input name="price" type="number" class="form-control" placeholder="Room Price" required>
+                                            <input name="price" value="{{ old('price') }}" type="number" class="form-control" placeholder="Room Price" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb20">
@@ -73,13 +73,13 @@
                                     <div class="col-md-6 mb20">
                                         <div class="form-group">
                                             <label>Available Units</label>
-                                            <input class="form-control" name="unit" type="number">
+                                            <input class="form-control" value="{{ old('unit') }}" name="unit" type="number">
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb20">
                                         <div class="form-group">
                                             <label>Room Description</label>
-                                            <textarea class="form-control" name="description">
+                                            <textarea value="{{ old('description') }}" class="form-control" name="description">
 
                                             </textarea>
                                         </div>
